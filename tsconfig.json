@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist",
+    "rootDir": "src",
     "moduleResolution": "node",
-
+    // "types": ["express", "graphql", "node", "typeorm"],
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -21,6 +22,6 @@
     "experimentalDecorators": true
     // "extends": ["tslint:latest", "tslint-config-prettier"]
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist", "src/graphqlgen/*"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts"]
 }
