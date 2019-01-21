@@ -13,6 +13,9 @@ const { ApolloServer } = require("apollo-server-express");
 const { RedisCache } = require("apollo-server-cache-redis");
 
 require("dotenv").config();
+console.log("ENV: ", process.env.NODE_ENV);
+console.log("REDIS_HOST: ", process.env.REDIS_HOST);
+console.log("TYPEORM_HOST: ", process.env.TYPEORM_HOST);
 
 createConnection()
   .then((connection: Connection) => {
@@ -22,8 +25,6 @@ createConnection()
       }
     };
 
-    // console.log("ENV: ", process.env.NODE_ENV);
-    // console.log("REDIS_HOST: ", process.env.REDIS_HOST);
     // const TYPEDEFS_PATH =
     //   process.env.NODE_ENV === "production"
     //     ? "./schema/typeDefs.graphql"

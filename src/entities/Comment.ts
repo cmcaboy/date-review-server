@@ -1,5 +1,3 @@
-console.log("comment2.ts");
-console.log("comment3.ts");
 import { Review } from "./Review";
 import { Person } from "./Person";
 import {
