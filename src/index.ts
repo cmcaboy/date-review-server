@@ -62,6 +62,6 @@ createConnection().then((connection: Connection) => {
   });
 
   app.listen(4000, () => {
-    console.log(`API ready at ready at port 4000`);
+    console.log(`API is ready at ready at port 4000`);
   });
 });
