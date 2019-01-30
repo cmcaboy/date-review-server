@@ -71,7 +71,8 @@ createConnection()
 
     server.applyMiddleware({
       app,
-      path
+      path,
+      cors: false
     });
 
     app.listen(process.env.PORT || 4000, () => {
