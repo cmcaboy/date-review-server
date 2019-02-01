@@ -19,6 +19,7 @@ type Person {
   lastName: String
   email: String
   age: Int
+  instagramId: String
   datetime: Float
   reviews: [Review]
   isActive: Boolean
@@ -96,7 +97,7 @@ type Mutation {
     title: String
     description: String
     rating: Int
-    userId: Int
+    userId: ID
   ): Review
   editComment(id: ID!, text: String!): Comment
   deleteUser(id: ID!): Boolean
