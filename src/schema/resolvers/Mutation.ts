@@ -13,8 +13,10 @@ export const Mutation: ResolverMap = {
   ...MutationResolvers.defaultResolvers,
   newUser: (_, userArgs, { dataSources }) =>
     dataSources.typeORM.newUser(userArgs),
-  newReview: (_, reviewArgs, { dataSources }) =>
-    dataSources.typeORM.newReview(reviewArgs),
+  newReview: (_, reviewArgs, { dataSources }) => {
+    console.log("newReview resolver");
+    return dataSources.typeORM.newReview(reviewArgs);
+  },
   newComment: (_, commentArgs, { dataSources }) =>
     dataSources.typeORM.newComment(commentArgs),
   newPlatform: (_, platformArgs, { dataSources }) =>

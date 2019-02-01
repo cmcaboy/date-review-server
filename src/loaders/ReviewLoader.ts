@@ -1,4 +1,4 @@
-import * as DataLoader from "dataloader";
+import DataLoader from "dataloader";
 import { Review } from "../entities/Review";
 
 type BatchReview = (ids: string[]) => Promise<Review[]>;

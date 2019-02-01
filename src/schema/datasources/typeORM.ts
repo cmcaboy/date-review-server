@@ -25,6 +25,7 @@ export default class typeORM extends (DataSource as { new (): any }) {
     this.photoRepository = this.connection.getRepository(Photo);
     this.platformRepository = this.connection.getRepository(Platform);
 
+    console.log("typeORM class");
     // console.log("typeORM class");
   }
 

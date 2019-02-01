@@ -8,6 +8,11 @@ import typeDefs from "./schema/typeDefs";
 import { resolvers } from "./schema/resolvers/index";
 import { personLoader } from "./loaders/PersonLoader";
 
+// TODO: Remove cors and bodyParser if not needed.
+// TODO - Currently troubleshooting an empty body.
+// import cors from "cors";
+import bodyParser from "body-parser";
+
 // import statement did not work here
 const { ApolloServer } = require("apollo-server-express");
 const { RedisCache } = require("apollo-server-cache-redis");
@@ -40,8 +45,12 @@ createConnection()
     // use the roles parameter to validate the user has permission
     // to execute a specific query
     const context = async ({ req }: { req: any }) => {
-      const auth = (req.headers && req.headers.authorization) || "";
+      const auth = (req.headers && req.headers.cookie) || "";
+      console.log("req.headers: ", req.headers);
+      console.log("req.body: ", req.body);
+      console.log("req.headers.cookie: ", req.headers.cookie);
       console.log("auth: ", auth);
+      // console.log("req: ", req);
       return { person: null, personLoader: personLoader() };
     };
 
@@ -69,10 +78,30 @@ createConnection()
     const app: Application = express();
     const path: string = "/graphql";
 
+    // app.use(
+    //   cors({
+    //     credentials: true,
+    //     origin: "http://localhost:3000"
+    //   })
+    // );
+
+    // app.use(bodyParser.json());
+    // app.use(bodyParser.text({ type: "application/graphql" }));
+
+    app.use("/graphql", bodyParser.text());
+    app.use("/graphql", (req, _, next) => {
+      if (typeof req.body === "string") {
+        req.body = JSON.parse(req.body);
+      }
+      next();
+    });
+
+    console.log("app: ", app);
+
     server.applyMiddleware({
       app,
-      path,
-      cors: false
+      path
+      // cors: false
     });
 
     app.listen(process.env.PORT || 4000, () => {

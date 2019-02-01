@@ -7,6 +7,7 @@
     "outDir": "./dist",
     "rootDir": "src",
     "moduleResolution": "node",
+    // "composite": false,
     // "types": ["express", "graphql", "node", "typeorm"],
     "removeComments": true,
     "noImplicitAny": true,
@@ -17,7 +18,8 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
     // "extends": ["tslint:latest", "tslint-config-prettier"]
