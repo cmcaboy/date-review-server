@@ -72,7 +72,8 @@ createConnection()
       dataSources,
       engine: {
         apiKey: process.env.ENGINE_API_KEY
-      }
+      },
+      introspection: true
     });
 
     const app: Application = express();
