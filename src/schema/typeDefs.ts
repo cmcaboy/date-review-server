@@ -1,8 +1,8 @@
 const typeDefs = `
     type Query {
         person(id: ID): Person
-        review(id: ID): Review
-        comment(id: ID): Comment
+        review(id: ID!): Review
+        comment(id: ID!): Comment
         findUsers(username: String, firstName: String, lastName: String): [Person]
         findReviews(userId: ID): [Review]
         findComments(reviewId: ID): [Comment]
@@ -20,6 +20,7 @@ const typeDefs = `
         lastName: String
         email: String
         age: Int
+        instagramId: String
         datetime: Float
         reviews: [Review]
         isActive: Boolean
@@ -104,7 +105,7 @@ const typeDefs = `
             title: String,
             description: String,
             rating: Int,
-            userId: Int
+            userId: ID
         ): Review
         editComment(
             id: ID!
