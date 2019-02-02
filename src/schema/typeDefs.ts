@@ -80,6 +80,20 @@ const typeDefs = `
             personId: ID,
             authorId: ID
         ): Review
+        newUserAndReview(
+            username: String!,
+            firstName: String,
+            lastName: String,
+            age: Int,
+            email: String,
+            instagramId: String,
+            platform: ID,
+            photos: [String],
+            title: String!,
+            description: String,
+            rating: Int,
+            authorId: ID
+        ): Review
         newComment(
             text: String!,
             authorId: ID,

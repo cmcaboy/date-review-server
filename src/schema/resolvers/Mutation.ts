@@ -17,6 +17,23 @@ export const Mutation: ResolverMap = {
     console.log("newReview resolver");
     return dataSources.typeORM.newReview(reviewArgs);
   },
+  newUserAndReview: async (
+    _,
+    { title, description, rating, authorId, ...userArgs },
+    { dataSources }
+  ) => {
+    const newUser = await dataSources.typeORM.newUser(userArgs);
+    const personId = newUser.id; // grab id for new user
+
+    const firstReview = await dataSources.typeORM.newReview({
+      title,
+      description,
+      rating,
+      personId,
+      authorId
+    });
+    return firstReview;
+  },
   newComment: (_, commentArgs, { dataSources }) =>
     dataSources.typeORM.newComment(commentArgs),
   newPlatform: (_, platformArgs, { dataSources }) =>

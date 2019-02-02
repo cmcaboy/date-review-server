@@ -103,6 +103,9 @@ export default class typeORM extends (DataSource as { new (): any }) {
   }: {
     authorId: string;
     personId: string;
+    title?: string;
+    description?: string;
+    rating: number;
   }) => {
     // Build review row
     const review = await this.reviewRepository.create({
