@@ -76,7 +76,7 @@ const typeDefs = `
         newReview(
             title: String!,
             description: String,
-            rating: Int,
+            rating: Int!,
             personId: ID,
             authorId: ID
         ): Review
@@ -91,7 +91,7 @@ const typeDefs = `
             photos: [String],
             title: String!,
             description: String,
-            rating: Int,
+            rating: Int!,
             authorId: ID
         ): Review
         newComment(
