@@ -84,7 +84,7 @@ export default class typeORM extends (DataSource as { new (): any }) {
     });
     const ret = await this.personRepository.save(newUser);
     // if any photos are present, insert them in the photo repository
-    if (photos.length) {
+    if (photos && photos.length) {
       await Promise.all(
         photos.map(async photo => {
           const photoInst = await this.photoRepository.create({
