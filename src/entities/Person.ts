@@ -22,19 +22,19 @@ export class Person extends BaseEntity {
   @Column()
   username: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   firstName: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   lastName: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   age: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   instagramId: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   email: string;
 
   @Column()
@@ -46,7 +46,7 @@ export class Person extends BaseEntity {
   @Column({ nullable: true })
   platformId: string;
 
-  @OneToMany(() => Photo, photo => photo.person, { nullable: false })
+  @OneToMany(() => Photo, photo => photo.person, { nullable: true })
   photos: Photo[];
 
   @OneToMany(() => Review, review => review.person)
