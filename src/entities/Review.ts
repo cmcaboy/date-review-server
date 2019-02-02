@@ -17,10 +17,10 @@ export class Review extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   title: string;
 
-  @Column()
+  @Column({ nullable: false })
   description: string;
 
   @Column()

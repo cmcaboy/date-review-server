@@ -17,7 +17,7 @@ export class Platform {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   description: string;
 
   @OneToMany(() => Person, person => person.platform)
