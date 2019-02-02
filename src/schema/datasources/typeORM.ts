@@ -83,16 +83,19 @@ export default class typeORM extends (DataSource as { new (): any }) {
       isActive: true
     });
     const ret = await this.personRepository.save(newUser);
-    await Promise.all(
-      photos.map(async photo => {
-        const photoInst = await this.photoRepository.create({
-          personId: newUser.id,
-          url: photo
-        });
-        // console.log("photoInst: ", photoInst);
-        return this.photoRepository.save(photoInst);
-      })
-    );
+    // if any photos are present, insert them in the photo repository
+    if (photos.length) {
+      await Promise.all(
+        photos.map(async photo => {
+          const photoInst = await this.photoRepository.create({
+            personId: newUser.id,
+            url: photo
+          });
+          // console.log("photoInst: ", photoInst);
+          return this.photoRepository.save(photoInst);
+        })
+      );
+    }
     return ret;
   };
 
