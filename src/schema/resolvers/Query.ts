@@ -13,6 +13,7 @@ export const Query: ResolverMap = {
   review: (_, { id }, { dataSources }) => dataSources.typeORM.findReview(id),
   comment: (_, { id }, { dataSources }) => dataSources.typeORM.findComment(id),
   findUsers: async (_, searchParams, { dataSources }) => {
+    console.log("findUsers: ", searchParams);
     return dataSources.typeORM.findUsers(searchParams);
   },
   findReviews: (_, { userId: id }, { dataSources }) =>
