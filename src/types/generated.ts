@@ -18,11 +18,11 @@ export namespace QueryResolvers {
   }
 
   export interface ArgsReview {
-    id?: string | null;
+    id: string;
   }
 
   export interface ArgsComment {
-    id?: string | null;
+    id: string;
   }
 
   export interface ArgsFindUsers {
@@ -220,8 +220,16 @@ export namespace PersonResolvers {
     email: (parent: Person) =>
       parent.email === undefined ? null : parent.email,
     age: (parent: Person) => (parent.age === undefined ? null : parent.age),
-    datetime: (parent: Person) =>
-      parent.datetime === undefined ? null : parent.datetime
+    createDate: (parent: Person) =>
+      parent.createDate === undefined ? null : parent.createDate,
+    isActive: (parent: Person) =>
+      parent.isActive === undefined ? null : parent.isActive,
+    profilePic: (parent: Person) =>
+      parent.profilePic === undefined ? null : parent.profilePic,
+    averageRating: (parent: Person) =>
+      parent.averageRating === undefined ? null : parent.averageRating,
+    numRatings: (parent: Person) =>
+      parent.numRatings === undefined ? null : parent.numRatings
   };
 
   export type IdResolver = (
@@ -266,12 +274,19 @@ export namespace PersonResolvers {
     info: GraphQLResolveInfo
   ) => number | null | Promise<number | null>;
 
-  export type DatetimeResolver = (
+  export type InstagramIdResolver = (
     parent: Person,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo
-  ) => number | null | Promise<number | null>;
+  ) => string | null | Promise<string | null>;
+
+  export type CreateDateResolver = (
+    parent: Person,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => string | null | Promise<string | null>;
 
   export type ReviewsResolver = (
     parent: Person,
@@ -286,6 +301,13 @@ export namespace PersonResolvers {
     ctx: Context,
     info: GraphQLResolveInfo
   ) => boolean | null | Promise<boolean | null>;
+
+  export type ProfilePicResolver = (
+    parent: Person,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => string | null | Promise<string | null>;
 
   export type PhotosResolver = (
     parent: Person,
@@ -314,6 +336,20 @@ export namespace PersonResolvers {
     ctx: Context,
     info: GraphQLResolveInfo
   ) => Array<Comment | null> | null | Promise<Array<Comment | null> | null>;
+
+  export type AverageRatingResolver = (
+    parent: Person,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => number | null | Promise<number | null>;
+
+  export type NumRatingsResolver = (
+    parent: Person,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => number | null | Promise<number | null>;
 
   export interface Type {
     id: (
@@ -358,12 +394,19 @@ export namespace PersonResolvers {
       info: GraphQLResolveInfo
     ) => number | null | Promise<number | null>;
 
-    datetime: (
+    instagramId: (
       parent: Person,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo
-    ) => number | null | Promise<number | null>;
+    ) => string | null | Promise<string | null>;
+
+    createDate: (
+      parent: Person,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => string | null | Promise<string | null>;
 
     reviews: (
       parent: Person,
@@ -378,6 +421,13 @@ export namespace PersonResolvers {
       ctx: Context,
       info: GraphQLResolveInfo
     ) => boolean | null | Promise<boolean | null>;
+
+    profilePic: (
+      parent: Person,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => string | null | Promise<string | null>;
 
     photos: (
       parent: Person,
@@ -406,6 +456,20 @@ export namespace PersonResolvers {
       ctx: Context,
       info: GraphQLResolveInfo
     ) => Array<Comment | null> | null | Promise<Array<Comment | null> | null>;
+
+    averageRating: (
+      parent: Person,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => number | null | Promise<number | null>;
+
+    numRatings: (
+      parent: Person,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => number | null | Promise<number | null>;
   }
 }
 
@@ -418,8 +482,8 @@ export namespace ReviewResolvers {
       parent.description === undefined ? null : parent.description,
     rating: (parent: Review) =>
       parent.rating === undefined ? null : parent.rating,
-    datetime: (parent: Review) =>
-      parent.datetime === undefined ? null : parent.datetime
+    updateDateTime: (parent: Review) =>
+      parent.updateDateTime === undefined ? null : parent.updateDateTime
   };
 
   export type IdResolver = (
@@ -450,12 +514,12 @@ export namespace ReviewResolvers {
     info: GraphQLResolveInfo
   ) => number | null | Promise<number | null>;
 
-  export type DatetimeResolver = (
+  export type UpdateDateTimeResolver = (
     parent: Review,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo
-  ) => number | null | Promise<number | null>;
+  ) => string | null | Promise<string | null>;
 
   export type AuthorResolver = (
     parent: Review,
@@ -507,12 +571,12 @@ export namespace ReviewResolvers {
       info: GraphQLResolveInfo
     ) => number | null | Promise<number | null>;
 
-    datetime: (
+    updateDateTime: (
       parent: Review,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo
-    ) => number | null | Promise<number | null>;
+    ) => string | null | Promise<string | null>;
 
     author: (
       parent: Review,
@@ -540,7 +604,9 @@ export namespace ReviewResolvers {
 export namespace CommentResolvers {
   export const defaultResolvers = {
     id: (parent: Comment) => parent.id,
-    text: (parent: Comment) => (parent.text === undefined ? null : parent.text)
+    text: (parent: Comment) => (parent.text === undefined ? null : parent.text),
+    updateDateTime: (parent: Comment) =>
+      parent.updateDateTime === undefined ? null : parent.updateDateTime
   };
 
   export type IdResolver = (
@@ -564,19 +630,19 @@ export namespace CommentResolvers {
     info: GraphQLResolveInfo
   ) => string | null | Promise<string | null>;
 
-  export type DatetimeResolver = (
-    parent: Comment,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo
-  ) => number | null | Promise<number | null>;
-
   export type ReviewResolver = (
     parent: Comment,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo
   ) => Review | null | Promise<Review | null>;
+
+  export type UpdateDateTimeResolver = (
+    parent: Comment,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => string | null | Promise<string | null>;
 
   export interface Type {
     id: (
@@ -600,19 +666,19 @@ export namespace CommentResolvers {
       info: GraphQLResolveInfo
     ) => string | null | Promise<string | null>;
 
-    datetime: (
-      parent: Comment,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo
-    ) => number | null | Promise<number | null>;
-
     review: (
       parent: Comment,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo
     ) => Review | null | Promise<Review | null>;
+
+    updateDateTime: (
+      parent: Comment,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => string | null | Promise<string | null>;
   }
 }
 
@@ -785,7 +851,7 @@ export namespace MutationResolvers {
     title?: string | null;
     description?: string | null;
     rating?: number | null;
-    userId?: number | null;
+    userId?: string | null;
   }
 
   export interface ArgsEditComment {
