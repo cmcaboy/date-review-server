@@ -7,9 +7,8 @@ import { createConnection, Connection } from "typeorm";
 import typeDefs from "./schema/typeDefs";
 import { resolvers } from "./schema/resolvers/index";
 import { personLoader } from "./loaders/PersonLoader";
+import { reviewLoader } from "./loaders/ReviewLoader";
 
-// TODO: Remove cors and bodyParser if not needed.
-// TODO - Currently troubleshooting an empty body.
 // import cors from "cors";
 import bodyParser from "body-parser";
 
@@ -18,9 +17,9 @@ const { ApolloServer } = require("apollo-server-express");
 const { RedisCache } = require("apollo-server-cache-redis");
 
 require("dotenv").config();
-console.log("ENV: ", process.env.NODE_ENV);
-console.log("REDIS_HOST: ", process.env.REDIS_HOST);
-console.log("TYPEORM_HOST: ", process.env.TYPEORM_HOST);
+// console.log("ENV: ", process.env.NODE_ENV);
+// console.log("REDIS_HOST: ", process.env.REDIS_HOST);
+// console.log("TYPEORM_HOST: ", process.env.TYPEORM_HOST);
 
 createConnection()
   .then((connection: Connection) => {
@@ -46,12 +45,16 @@ createConnection()
     // to execute a specific query
     const context = async ({ req }: { req: any }) => {
       const auth = (req.headers && req.headers.cookie) || "";
-      console.log("req.headers: ", req.headers);
-      console.log("req.body: ", req.body);
-      console.log("req.headers.cookie: ", req.headers.cookie);
+      // console.log("req.headers: ", req.headers);
+      // console.log("req.body: ", req.body);
+      // console.log("req.headers.cookie: ", req.headers.cookie);
       console.log("auth: ", auth);
       // console.log("req: ", req);
-      return { person: null, personLoader: personLoader() };
+      return {
+        person: null,
+        personLoader: personLoader(),
+        reviewLoader: reviewLoader()
+      };
     };
 
     // set up the data sources our resolvers need
@@ -96,8 +99,6 @@ createConnection()
       }
       next();
     });
-
-    console.log("app: ", app);
 
     server.applyMiddleware({
       app,
