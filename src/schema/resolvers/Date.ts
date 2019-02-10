@@ -1,6 +1,8 @@
 import { GraphQLScalarType, Kind } from "graphql";
 // import { ResolverMap } from '../../types/ResolverType';
 
+// * Customer Scalar: Date
+
 export const Date: any = {
   Date: new GraphQLScalarType({
     name: "Date",

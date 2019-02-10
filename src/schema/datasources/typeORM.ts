@@ -40,8 +40,14 @@ export default class typeORM extends (DataSource as { new (): any }) {
 
   findComment = (id: string) => this.commentRepository.findOne(id);
 
-  findUsers = (searchParams: any) =>
-    this.personRepository.find({ ...searchParams });
+  findUsers = async ({ username }: { username: string }) => {
+    const ret = await this.personRepository
+      .createQueryBuilder("person")
+      .where("person.username LIKE :username", { username: `${username}%` })
+      .getMany();
+    return ret;
+    //  return this.personRepository.find({ ...searchParams });
+  };
 
   findUsersFromPlatform = (platformId: any) =>
     this.personRepository.find({ platformId });
