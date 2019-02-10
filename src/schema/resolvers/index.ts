@@ -8,6 +8,7 @@ import { Photo } from "./Photo";
 import { Platform } from "./Platform";
 import { Review } from "./Review";
 import { Person } from "./Person";
+import { Date } from "./Date";
 // import { Resolvers } from "../../types/generated";
 import { IResolvers } from "graphql-tools";
 
@@ -18,5 +19,6 @@ export const resolvers: IResolvers = {
   Photo,
   Platform,
   Review,
-  Person
+  Person,
+  Date
 };
