@@ -20,13 +20,16 @@ type Person {
   email: String
   age: Int
   instagramId: String
-  datetime: Float
+  createDate: String
   reviews: [Review]
   isActive: Boolean
+  profilePic: String
   photos: [Photo]
   platform: Platform
   authoredReviews: [Review]
   comments: [Comment]
+  averageRating: Float
+  numRatings: Int
 }
 
 type Review {
@@ -34,7 +37,7 @@ type Review {
   title: String
   description: String
   rating: Int
-  datetime: Float
+  updateDateTime: String
   author: Person
   comments: [Comment]
   person: Person
@@ -44,8 +47,8 @@ type Comment {
   id: ID
   author: Person
   text: String
-  datetime: Float
   review: Review
+  updateDateTime: String
 }
 
 type Photo {

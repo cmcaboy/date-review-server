@@ -1,4 +1,6 @@
 const typeDefs = `
+    scalar Date
+
     type Query {
         person(id: ID): Person
         review(id: ID!): Review
@@ -21,13 +23,16 @@ const typeDefs = `
         email: String
         age: Int
         instagramId: String
-        datetime: Float
+        createDate: Date
         reviews: [Review]
         isActive: Boolean
+        profilePic: Photo
         photos: [Photo]
         platform: Platform
         authoredReviews: [Review]
         comments: [Comment]
+        averageRating: Float
+        numRatings: Int
     }
 
     type Review {
@@ -35,7 +40,7 @@ const typeDefs = `
         title: String
         description: String
         rating: Int
-        datetime: Float
+        updateDateTime: Date
         author: Person
         comments: [Comment]
         person: Person
@@ -45,7 +50,7 @@ const typeDefs = `
         id: ID
         author: Person
         text: String
-        datetime: Float
+        updateDateTime: Date
         review: Review
     }
 

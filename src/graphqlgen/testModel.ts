@@ -5,15 +5,19 @@ export interface Person {
   lastName: string | null;
   email: string | null;
   age: number | null;
-  datetime: number | null;
+  createDate: string | null;
+  isActive: boolean | null;
+  profilePic: string | null;
   platformId: string;
+  averageRating: number | null;
+  numRatings: number | null;
 }
 export interface Review {
   id: string;
   title: string | null;
   description: string | null;
   rating: number | null;
-  datetime: number | null;
+  updateDateTime: number | null;
   personId: string;
   authorId: string;
 }
@@ -22,6 +26,7 @@ export interface Comment {
   text: string | null;
   authorId: string;
   reviewId: string;
+  updateDateTime: number | null;
 }
 export interface Photo {
   id: string;
