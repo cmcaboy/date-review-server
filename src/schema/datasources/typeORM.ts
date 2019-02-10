@@ -49,6 +49,7 @@ export default class typeORM extends (DataSource as { new (): any }) {
   // returns reviews attached to a user
   findReviews = async (id: string) => {
     const reviews = await this.reviewRepository.find({ personId: id });
+    console.log("reviews: ", reviews);
     return reviews;
   };
 
@@ -56,9 +57,11 @@ export default class typeORM extends (DataSource as { new (): any }) {
     this.reviewRepository.find({ authorId: id });
 
   // returns comments attached to a review
-  findComments = (id: string) =>
-    // this.reviewRepository.findOne(id, { relations: ["comments"] });
-    this.commentRepository.find({ reviewId: id });
+  findComments = async (id: string) => {
+    const comments = await this.commentRepository.find({ reviewId: id });
+    return comments;
+  };
+  // this.reviewRepository.findOne(id, { relations: ["comments"] });
 
   findCommentsByAuthor = (authorId: string) =>
     this.commentRepository.find({ authorId });
