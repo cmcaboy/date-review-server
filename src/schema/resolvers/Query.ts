@@ -13,11 +13,13 @@ export const Query: ResolverMap = {
   review: (_, { id }, { dataSources }) => dataSources.typeORM.findReview(id),
   comment: (_, { id }, { dataSources }) => dataSources.typeORM.findComment(id),
   findUsers: async (_, searchParams, { dataSources }) => {
-    console.log("findUsers: ", searchParams);
     return dataSources.typeORM.findUsers(searchParams);
   },
-  findReviews: (_, { userId: id }, { dataSources }) =>
-    dataSources.typeORM.findReviews(id),
+  findReviews: async (_, { userId: id }, { dataSources }) => {
+    const reviews = await dataSources.typeORM.findReviews(id);
+    console.log("reviews resolvers: ", reviews);
+    return reviews;
+  },
   findComments: (_, { reviewID: id }, { dataSources }) =>
     dataSources.typeORM.findComments(id),
   platform: (_, { id }, { dataSources }) =>
