@@ -34,9 +34,11 @@ export const Person: ResolverMap = {
     if (!reviews.length) {
       return 0;
     }
-    return (
+
+    const average =
       reviews.map(review => review.rating).reduce((prev, curr) => prev + curr) /
-      reviews.length
-    );
+      reviews.length;
+    // Round to 2 decimal places
+    return Math.round((average * 100) / 100);
   }
 };
