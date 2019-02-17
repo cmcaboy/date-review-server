@@ -18,7 +18,9 @@ export const Query: ResolverMap = {
   findReviews: async (_, { userId: id }, { dataSources }) => {
     const reviews = await dataSources.typeORM.findReviews(id);
     console.log("reviews resolvers: ", reviews);
-    return reviews;
+    return reviews.sort(
+      (a, b) => b.updateDateTime.getTime() - a.updateDateTime.getTime()
+    );
   },
   findComments: (_, { reviewID: id }, { dataSources }) =>
     dataSources.typeORM.findComments(id),
