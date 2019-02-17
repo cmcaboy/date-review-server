@@ -22,7 +22,7 @@ export const Query: ResolverMap = {
       (a, b) => b.updateDateTime.getTime() - a.updateDateTime.getTime()
     );
   },
-  findComments: (_, { reviewID: id }, { dataSources }) =>
+  findComments: (_, { reviewId: id }, { dataSources }) =>
     dataSources.typeORM.findComments(id),
   platform: (_, { id }, { dataSources }) =>
     dataSources.typeORM.findPlatform(id),
