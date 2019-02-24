@@ -22,8 +22,12 @@ export const Query: ResolverMap = {
       (a, b) => b.updateDateTime.getTime() - a.updateDateTime.getTime()
     );
   },
-  findComments: (_, { reviewId: id }, { dataSources }) =>
-    dataSources.typeORM.findComments(id),
+  findComments: async (_, { reviewId: id }, { dataSources }) => {
+    const comments = await dataSources.typeORM.findComments(id);
+    return comments.sort(
+      (a, b) => b.updateDateTime.getTime() - a.updateDateTime.getTime()
+    );
+  },
   platform: (_, { id }, { dataSources }) =>
     dataSources.typeORM.findPlatform(id),
   findAllPlatforms: (_, __, { dataSources }) =>
